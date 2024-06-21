@@ -54,3 +54,4 @@ export const initializeAppTC = () => (dispatch: Dispatch) => {
 
 export const appReducer = slice.reducer
 export const appActions = slice.actions
+export type InitialStateApp = ReturnType<typeof slice.getInitialState>
