@@ -7,7 +7,7 @@ import { Button, IconButton } from "@mui/material"
 import { Delete } from "@mui/icons-material"
 import { useAppDispatch } from "hooks/useAppDispatch"
 import { FilterValuesType, TodolistDomainType } from "features/TodolistsList/todolistsSlice"
-import { fetchTasksTC } from "features/TodolistsList/tasks-reducer"
+import { fetchTasksTC } from "features/TodolistsList/tasksSlice"
 
 type PropsType = {
   todolist: TodolistDomainType

@@ -1,7 +1,3 @@
-import { appActions, appReducer, InitialStateApp } from "./app-reducer"
-
-let startState: InitialStateApp
-
 beforeEach(() => {
   startState = {
     error: null,
