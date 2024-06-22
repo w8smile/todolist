@@ -2,7 +2,7 @@ import {
     TaskPriorities,
     TaskStatuses,
     TaskType,
-    todolistsAPI,
+    todolistsAPI, TodolistType,
     UpdateTaskModelType
 } from '../../api/todolists-api'
 import {Dispatch} from 'redux'
@@ -41,7 +41,11 @@ const slice = createSlice({
         },
         setTasks: (state, action: PayloadAction<{ tasks: TaskType[], todolistId: string }>) => {
             state[action.payload.todolistId] = action.payload.tasks
+        },
+        clearData: (state, action: PayloadAction<any>) => {
+            return {}
         }
+
     },
     extraReducers: (builder) => {
         builder
@@ -58,7 +62,6 @@ const slice = createSlice({
             })
     },
 });
-
 
 
 // thunks
