@@ -9,13 +9,14 @@ import {
   removeTodolistTC, todolistActions,
   TodolistDomainType
 } from './todolistsSlice'
-import { addTaskTC, removeTaskTC, TasksStateType, updateTaskTC } from './tasksSlice'
+
 import { TaskStatuses } from '../../api/todolists-api'
 import { Grid, Paper } from '@mui/material'
 import { AddItemForm } from '../../components/AddItemForm/AddItemForm'
 import { Todolist } from './Todolist/Todolist'
 import { Navigate } from 'react-router-dom'
 import { useAppDispatch } from '../../hooks/useAppDispatch';
+import {addTaskTC, removeTaskTC, TasksStateType, updateTaskTC} from "./tasks-reducer";
 
 type PropsType = {
   demo?: boolean
