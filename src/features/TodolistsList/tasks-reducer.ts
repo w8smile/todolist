@@ -42,7 +42,7 @@ const slice = createSlice({
         setTasks: (state, action: PayloadAction<{ tasks: TaskType[], todolistId: string }>) => {
             state[action.payload.todolistId] = action.payload.tasks
         },
-        clearData: (state, action: PayloadAction<any>) => {
+        clearTasks: () => {
             return {}
         }
 

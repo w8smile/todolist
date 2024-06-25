@@ -7,7 +7,7 @@ import { AppRootStateType } from "./store"
 import {initializeAppTC, RequestStatusType, selectIsInitialized, selectStatus} from "./app-reducer"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import { Login } from "features/Login/Login"
-import { logoutTC } from "features/Login/auth-reducer"
+import {logoutTC, selectIsLoggedIn} from "features/Login/auth-reducer"
 import {
   AppBar,
   Button,
@@ -29,7 +29,7 @@ function App({ demo = false }: PropsType) {
   // const isInitialized = useSelector<AppRootStateType, boolean>((state) => state.app.isInitialized)
   const status = useSelector(selectStatus)
   const isInitialized = useSelector(selectIsInitialized)
-  const isLoggedIn = useSelector<AppRootStateType, boolean>((state) => state.auth.isLoggedIn)
+  const isLoggedIn = useSelector(selectIsLoggedIn)
   const dispatch = useDispatch<any>()
 
   useEffect(() => {
