@@ -1,18 +1,19 @@
 import React from "react"
-import { useFormik } from "formik"
-import { useSelector } from "react-redux"
-import { loginTC } from "./auth-reducer"
-import { AppRootStateType } from "app/store"
-import { Navigate } from "react-router-dom"
-import { useAppDispatch } from "hooks/useAppDispatch"
-import { Button, Checkbox, FormControl, FormControlLabel, FormGroup, FormLabel, Grid, TextField } from "@mui/material"
-import {selectIsInitialized} from "../../app/app-reducer";
+import {useFormik} from "formik"
+import {useSelector} from "react-redux"
+import {loginTC} from "./auth-reducer"
+import {AppRootStateType} from "app/store"
+import {Navigate} from "react-router-dom"
+import {useAppDispatch} from "hooks/useAppDispatch"
+import {Button, Checkbox, FormControl, FormControlLabel, FormGroup, FormLabel, Grid, TextField} from "@mui/material"
+import {selectIsInitialized} from "../../app/app-selectors";
+import {selectIsLoggedIn} from "./auth-selectors";
 
 export const Login = () => {
   const dispatch = useAppDispatch()
 
-  const isLoggedIn = useSelector<AppRootStateType, boolean>((state) => state.auth.isLoggedIn)
-  // const isLoggedIn = useSelector(selectIsInitialized)
+  const isLoggedIn = useSelector(selectIsLoggedIn)
+
 
 
   const formik = useFormik({

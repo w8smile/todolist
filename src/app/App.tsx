@@ -4,10 +4,10 @@ import { TodolistsList } from "features/TodolistsList/TodolistsList"
 import { ErrorSnackbar } from "components/ErrorSnackbar/ErrorSnackbar"
 import { useDispatch, useSelector } from "react-redux"
 import { AppRootStateType } from "./store"
-import {initializeAppTC, RequestStatusType, selectIsInitialized, selectStatus} from "./app-reducer"
+import {initializeAppTC} from "./app-reducer"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import { Login } from "features/Login/Login"
-import {logoutTC, selectIsLoggedIn} from "features/Login/auth-reducer"
+import {logoutTC} from "features/Login/auth-reducer"
 import {
   AppBar,
   Button,
@@ -19,6 +19,9 @@ import {
   Typography,
 } from "@mui/material"
 import { Menu } from "@mui/icons-material"
+import {selectAppError, selectAppStatus, selectIsInitialized} from "./app-selectors";
+import {selectIsLoggedIn} from "../features/Login/auth-selectors";
+import {useAppDispatch} from "../hooks/useAppDispatch";
 
 type PropsType = {
   demo?: boolean
@@ -27,10 +30,10 @@ type PropsType = {
 function App({ demo = false }: PropsType) {
   // const status = useSelector<AppRootStateType, RequestStatusType>((state) => state.app.status)
   // const isInitialized = useSelector<AppRootStateType, boolean>((state) => state.app.isInitialized)
-  const status = useSelector(selectStatus)
+  const status = useSelector(selectAppStatus)
   const isInitialized = useSelector(selectIsInitialized)
   const isLoggedIn = useSelector(selectIsLoggedIn)
-  const dispatch = useDispatch<any>()
+  const dispatch = useAppDispatch()
 
   useEffect(() => {
     dispatch(initializeAppTC())

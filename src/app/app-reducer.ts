@@ -28,11 +28,6 @@ const slice = createSlice({
       state.isInitialized = action.payload.isInitialized
     },
   },
-  selectors: {
-    selectError: (state)=>state.error,
-    selectStatus: (state)=>state.status,
-    selectIsInitialized: (state)=>state.isInitialized
-  }
 })
 
 // export const appReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
@@ -60,4 +55,3 @@ export const initializeAppTC = () => (dispatch: Dispatch) => {
 export const appReducer = slice.reducer
 export const appActions = slice.actions
 export type InitialStateApp = ReturnType<typeof slice.getInitialState>
-export const {selectError, selectStatus, selectIsInitialized} = slice.selectors
