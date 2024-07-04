@@ -1,5 +1,5 @@
 
-import {todolistReducer} from "features/TodolistsList/todolistsSlice"
+import {todolistReducer} from "features/TodolistsList/todolists-reducer"
 import { combineReducers } from "redux"
 import { ThunkAction, ThunkDispatch } from "redux-thunk"
 import { appReducer } from "./app-reducer"

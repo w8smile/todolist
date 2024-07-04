@@ -6,7 +6,7 @@ import { TaskStatuses, TaskType } from "api/todolists-api"
 import { Button, IconButton } from "@mui/material"
 import { Delete } from "@mui/icons-material"
 import { useAppDispatch } from "hooks/useAppDispatch"
-import { FilterValuesType, TodolistDomainType } from "features/TodolistsList/todolistsSlice"
+import { FilterValuesType, TodolistDomainType } from "features/TodolistsList/todolists-reducer"
 import {fetchTasks} from "../tasks-reducer";
 
 

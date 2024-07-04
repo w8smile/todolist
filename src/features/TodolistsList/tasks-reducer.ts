@@ -11,7 +11,7 @@ import {AppThunk} from '../../app/store'
 import {handleServerAppError, handleServerNetworkError} from '../../utils/error-utils'
 import {appActions} from "../../app/app-reducer";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {todolistsActions} from "./todolistsSlice";
+import {fetchTodos, removeTodolist, todolistsActions} from "./todolists-reducer";
 import {clearTasksAndTodolists} from "../../common/actions/common-actions";
 import {createAppAsyncThunk} from "../../utils/create-app-async-thunk";
 import {Simulate} from "react-dom/test-utils";
@@ -51,10 +51,13 @@ const slice = createSlice({
             .addCase(todolistsActions.removeTodolist, (state, action) => {
                 delete state[action.payload.id]
             })
-            .addCase(todolistsActions.setTodolists, (state, action) => {
-                action.payload.todolists.forEach(todo => {
-                    state[todo.id] = []
+            .addCase(fetchTodos.fulfilled, (state, action) => {
+                action.payload.todolists.forEach((tl) => {
+                    state[tl.id] = []
                 })
+            })
+            .addCase(removeTodolist.fulfilled, (state, action) => {
+              state[action.payload.todolistId] = []
             })
             .addCase(clearTasksAndTodolists.type, () => {
                 return {}
@@ -62,7 +65,7 @@ const slice = createSlice({
     },
 });
 
-export const fetchTasks = createAppAsyncThunk<{ tasks: TaskType[], todolistId: string }, string, {
+export const fetchTasks = createAppAsyncThunk<{tasks: TaskType[], todolistId: string}, string, {
     rejectValue: null
 }>(`${slice.name}/fetchTasks`, async (todolistId, thunkAPI) => {
     const {dispatch, rejectWithValue} = thunkAPI

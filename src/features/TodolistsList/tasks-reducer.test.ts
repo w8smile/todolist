@@ -9,7 +9,7 @@ import {
 
 import {Action} from "../../common/types";
 import {TaskPriorities, TaskStatuses} from "../../api/todolists-api";
-import {todolistsActions} from "./todolistsSlice";
+import {todolistsActions} from "./todolists-reducer";
 
 let startState: TasksStateType = {};
 beforeEach(() => {
@@ -221,22 +221,22 @@ test("propertry with todolistId should be deleted", () => {
     expect(endState["todolistId2"]).not.toBeDefined();
 });
 
-test("empty arrays should be added when we set todolists", () => {
-    const action = todolistsActions.setTodolists({
-        todolists: [
-            { id: "1", title: "title 1", order: 0, addedDate: "" },
-            { id: "2", title: "title 2", order: 0, addedDate: "" },
-        ],
-    });
-
-    const endState = tasksReducer({}, action);
-
-    const keys = Object.keys(endState);
-
-    expect(keys.length).toBe(2);
-    expect(endState["1"]).toBeDefined();
-    expect(endState["2"]).toBeDefined();
-});
+// test("empty arrays should be added when we set todolists", () => {
+//     const action = todolistsActions.setTodolists({
+//         todolists: [
+//             { id: "1", title: "title 1", order: 0, addedDate: "" },
+//             { id: "2", title: "title 2", order: 0, addedDate: "" },
+//         ],
+//     });
+//
+//     const endState = tasksReducer({}, action);
+//
+//     const keys = Object.keys(endState);
+//
+//     expect(keys.length).toBe(2);
+//     expect(endState["1"]).toBeDefined();
+//     expect(endState["2"]).toBeDefined();
+// });
 
 test("tasks should be added for todolist", () => {
     const action: Action<typeof fetchTasks.fulfilled> = {

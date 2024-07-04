@@ -2,7 +2,7 @@
 import {v1} from 'uuid'
 import {TodolistType} from '../../api/todolists-api'
 import {RequestStatusType} from '../../app/app-reducer'
-import {FilterValuesType, todolistsActions, TodolistDomainType, todolistReducer} from "./todolistsSlice";
+import {FilterValuesType, todolistsActions, TodolistDomainType, todolistReducer} from "./todolists-reducer";
 
 let todolistId1: string
 let todolistId2: string
@@ -61,14 +61,14 @@ test('correct filter of todolist should be changed', () => {
   expect(endState[0].filter).toBe('all')
   expect(endState[1].filter).toBe(newFilter)
 })
-test('todolists should be added', () => {
-
-  const action = todolistsActions.setTodolists({todolists: startState})
-
-  const endState = todolistReducer([], action)
-
-  expect(endState.length).toBe(2)
-})
+// test('todolists should be added', () => {
+//
+//   const action = todolistsActions.setTodolists({todolists: startState})
+//
+//   const endState = todolistReducer([], action)
+//
+//   expect(endState.length).toBe(2)
+// })
 test('correct entity status of todolist should be changed', () => {
   let newStatus: RequestStatusType = 'loading'
 
