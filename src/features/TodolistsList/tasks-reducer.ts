@@ -1,21 +1,20 @@
 import {
-    CreateTaskArgs, DeleteTaskArgs, ResultCode,
+    CreateTaskArgs,
+    DeleteTaskArgs,
+    ResultCode,
     TaskPriorities,
     TaskStatuses,
     TaskType,
     todolistsAPI,
-    UpdateTaskModelType, UpdateTasksArgs
+    UpdateTaskModelType,
+    UpdateTasksArgs
 } from '../../api/todolists-api'
-import {Dispatch} from 'redux'
-import {AppThunk} from '../../app/store'
 import {handleServerAppError, handleServerNetworkError} from '../../utils/error-utils'
 import {appActions} from "../../app/app-reducer";
-import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {fetchTodos, removeTodolist, todolistsActions} from "./todolists-reducer";
+import {createSlice} from "@reduxjs/toolkit";
+import {addTodolist, fetchTodos, removeTodolist} from "./todolists-reducer";
 import {clearTasksAndTodolists} from "../../common/actions/common-actions";
 import {createAppAsyncThunk} from "../../utils/create-app-async-thunk";
-import {Simulate} from "react-dom/test-utils";
-import error = Simulate.error;
 
 
 const slice = createSlice({
@@ -45,19 +44,16 @@ const slice = createSlice({
             .addCase(fetchTasks.fulfilled, (state, action) => {
                 state[action.payload.todolistId] = action.payload.tasks
             })
-            .addCase(todolistsActions.addTodolist, (state, action) => {
-                state[action.payload.todolist.id] = []
-            })
-            .addCase(todolistsActions.removeTodolist, (state, action) => {
-                delete state[action.payload.id]
-            })
             .addCase(fetchTodos.fulfilled, (state, action) => {
                 action.payload.todolists.forEach((tl) => {
                     state[tl.id] = []
                 })
             })
             .addCase(removeTodolist.fulfilled, (state, action) => {
-              state[action.payload.todolistId] = []
+                delete state[action.payload.todolistId]
+            })
+            .addCase(addTodolist.fulfilled, (state,action)=>{
+                state[action.payload.todolist.id ] = []
             })
             .addCase(clearTasksAndTodolists.type, () => {
                 return {}
@@ -131,7 +127,6 @@ export const updateTask = createAppAsyncThunk<UpdateTasksArgs, UpdateTasksArgs>(
             dispatch(appActions.setAppStatus({status: 'succeeded'}))
             if (res.data.resultCode === ResultCode.success) {
                 return ({taskId: arg.taskId, todolistId: arg.todolistId, domainModel: arg.domainModel})
-
             } else {
                 handleServerAppError(res.data, dispatch);
                 return rejectWithValue(null);

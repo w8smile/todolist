@@ -1,8 +1,7 @@
 import React, {useCallback, useEffect} from 'react'
 import {useSelector} from 'react-redux'
 import {
-  addTodolistTC,
-  changeTodolistTitleTC,
+  addTodolist, changeTodolistTitle,
   fetchTodos,
   FilterValuesType, removeTodolist,
   todolistsActions
@@ -66,13 +65,13 @@ export const TodolistsList: React.FC<PropsType> = ({demo = false}) => {
     dispatch(thunk)
   }, [])
 
-  const changeTodolistTitle = useCallback(function (id: string, title: string) {
-    const thunk = changeTodolistTitleTC(id, title)
+  const changeTodolistTitleCallback = useCallback(function (id: string, title: string) {
+    const thunk = changeTodolistTitle({id, title})
     dispatch(thunk)
   }, [])
 
-  const addTodolist = useCallback((title: string) => {
-    const thunk = addTodolistTC(title)
+  const addTodolistCallback = useCallback((title: string) => {
+    const thunk = addTodolist(title)
     dispatch(thunk)
   }, [dispatch])
 
@@ -82,7 +81,7 @@ export const TodolistsList: React.FC<PropsType> = ({demo = false}) => {
 
   return <>
     <Grid container style={{padding: '20px'}}>
-      <AddItemForm addItem={addTodolist}/>
+      <AddItemForm addItem={addTodolistCallback}/>
     </Grid>
     <Grid container spacing={3}>
       {
@@ -100,7 +99,7 @@ export const TodolistsList: React.FC<PropsType> = ({demo = false}) => {
                   changeTaskStatus={changeStatus}
                   removeTodolist={removeTodolistCallback}
                   changeTaskTitle={changeTaskTitle}
-                  changeTodolistTitle={changeTodolistTitle}
+                  changeTodolistTitle={changeTodolistTitleCallback}
                   demo={demo}
               />
             </Paper>
