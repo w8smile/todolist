@@ -9,7 +9,7 @@ import {
     todolistReducer,
     removeTodolist, addTodolist, changeTodolistTitle, fetchTodos
 } from "./todolists-reducer";
-import {Action} from "../../common/types";
+import {Action} from "../../common/types/types";
 
 let todolistId1: string
 let todolistId2: string

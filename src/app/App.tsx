@@ -1,12 +1,10 @@
-import React, { useCallback, useEffect } from "react"
+import React, {useCallback, useEffect} from "react"
 import "./App.css"
-import { TodolistsList } from "features/TodolistsList/TodolistsList"
-import { ErrorSnackbar } from "common/components/ErrorSnackbar/ErrorSnackbar"
-import { useDispatch, useSelector } from "react-redux"
-import { AppRootStateType } from "./store"
+import {TodolistsList} from "features/TodolistsList/TodolistsList"
+import {useSelector} from "react-redux"
 import {initializeAppTC} from "./app-reducer"
-import { BrowserRouter, Route, Routes } from "react-router-dom"
-import { Login } from "features/auth/ui/Login"
+import {BrowserRouter, Route, Routes} from "react-router-dom"
+import {Login} from "features/auth/ui/Login"
 import {logoutTC} from "features/auth/model/auth-reducer"
 import {
   AppBar,
@@ -18,10 +16,12 @@ import {
   Toolbar,
   Typography,
 } from "@mui/material"
-import { Menu } from "@mui/icons-material"
-import {selectAppError, selectAppStatus, selectIsInitialized} from "./app-selectors";
-import {selectIsLoggedIn} from "../features/auth/model/auth-selectors";
-import {useAppDispatch} from "../common/hooks/useAppDispatch";
+import {Menu} from "@mui/icons-material"
+import {selectAppStatus, selectIsInitialized} from "./app-selectors";
+import {selectIsLoggedIn} from "features/auth/model/auth-selectors";
+import {useAppDispatch} from "common/hooks/useAppDispatch";
+import {ErrorSnackbar} from "common/components";
+
 
 type PropsType = {
   demo?: boolean
