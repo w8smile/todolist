@@ -9,11 +9,9 @@ import {TaskPriorities, TaskStatuses} from "../../common/enums";
 export const todolistsAPI = {
     getTodolists() {
         return instance.get<TodolistType[]>("todo-lists")
-
     },
     createTodolist(title: string) {
         return instance.post<BaseResponse<{ item: TodolistType }>>("todo-lists", {title: title})
-
     },
     deleteTodolist(id: string) {
         return instance.delete<BaseResponse>(`todo-lists/${id}`)
