@@ -7,15 +7,15 @@ import {
   todolistsActions
 } from './todolists-reducer'
 
-import {TaskStatuses} from '../../api/todolists-api'
+import {TaskStatuses} from './todolists-api'
 import {Grid, Paper} from '@mui/material'
-import {AddItemForm} from '../../components/AddItemForm/AddItemForm'
+import {AddItemForm} from '../../common/components/AddItemForm/AddItemForm'
 import {Todolist} from './Todolist/Todolist'
 import {Navigate} from 'react-router-dom'
-import {useAppDispatch} from '../../hooks/useAppDispatch';
+import {useAppDispatch} from '../../common/hooks/useAppDispatch';
 import {addTask, removeTask, updateTask} from "./tasks-reducer";
 import {selectTodolists} from "./todolist-select";
-import {selectIsLoggedIn} from "../Login/auth-selectors";
+import {selectIsLoggedIn} from "../auth/model/auth-selectors";
 import {selectTasks} from "./tasks-select";
 
 type PropsType = {

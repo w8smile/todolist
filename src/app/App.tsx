@@ -1,13 +1,13 @@
 import React, { useCallback, useEffect } from "react"
 import "./App.css"
 import { TodolistsList } from "features/TodolistsList/TodolistsList"
-import { ErrorSnackbar } from "components/ErrorSnackbar/ErrorSnackbar"
+import { ErrorSnackbar } from "common/components/ErrorSnackbar/ErrorSnackbar"
 import { useDispatch, useSelector } from "react-redux"
 import { AppRootStateType } from "./store"
 import {initializeAppTC} from "./app-reducer"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
-import { Login } from "features/Login/Login"
-import {logoutTC} from "features/Login/auth-reducer"
+import { Login } from "features/auth/ui/Login"
+import {logoutTC} from "features/auth/model/auth-reducer"
 import {
   AppBar,
   Button,
@@ -20,8 +20,8 @@ import {
 } from "@mui/material"
 import { Menu } from "@mui/icons-material"
 import {selectAppError, selectAppStatus, selectIsInitialized} from "./app-selectors";
-import {selectIsLoggedIn} from "../features/Login/auth-selectors";
-import {useAppDispatch} from "../hooks/useAppDispatch";
+import {selectIsLoggedIn} from "../features/auth/model/auth-selectors";
+import {useAppDispatch} from "../common/hooks/useAppDispatch";
 
 type PropsType = {
   demo?: boolean

@@ -8,13 +8,13 @@ import {
     todolistsAPI,
     UpdateTaskModelType,
     UpdateTasksArgs
-} from '../../api/todolists-api'
-import {handleServerAppError, handleServerNetworkError} from '../../utils/error-utils'
+} from './todolists-api'
+import {handleServerAppError, handleServerNetworkError} from '../../common/utils/error-utils'
 import {appActions} from "../../app/app-reducer";
 import {createSlice} from "@reduxjs/toolkit";
 import {addTodolist, fetchTodos, removeTodolist} from "./todolists-reducer";
 import {clearTasksAndTodolists} from "../../common/actions/common-actions";
-import {createAppAsyncThunk} from "../../utils/create-app-async-thunk";
+import {createAppAsyncThunk} from "../../common/utils/create-app-async-thunk";
 
 
 const slice = createSlice({
@@ -114,7 +114,7 @@ export const updateTask = createAppAsyncThunk<UpdateTasksArgs, UpdateTasksArgs>(
                 return rejectWithValue(null);
             }
 
-            const domainModel: UpdateTaskModelType = {
+            const apiModel: UpdateTaskModelType = {
                 deadline: task.deadline,
                 description: task.description,
                 priority: task.priority,
@@ -123,7 +123,7 @@ export const updateTask = createAppAsyncThunk<UpdateTasksArgs, UpdateTasksArgs>(
                 status: task.status,
                 ...arg.domainModel
             };
-            const res = await todolistsAPI.updateTask(arg.todolistId, arg.taskId, domainModel);
+            const res = await todolistsAPI.updateTask(arg.todolistId, arg.taskId, apiModel);
             dispatch(appActions.setAppStatus({status: 'succeeded'}))
             if (res.data.resultCode === ResultCode.success) {
                 return ({taskId: arg.taskId, todolistId: arg.todolistId, domainModel: arg.domainModel})

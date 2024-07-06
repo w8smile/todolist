@@ -7,7 +7,7 @@ import {
 } from "features/TodolistsList/tasks-reducer";
 
 import {Action} from "../../common/types";
-import {TaskPriorities, TaskStatuses} from "../../api/todolists-api";
+import {TaskPriorities, TaskStatuses} from "./todolists-api";
 import {todolistsActions} from "./todolists-reducer";
 
 let startState: TasksStateType = {};

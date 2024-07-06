@@ -1,9 +1,9 @@
-import {ResultCode, todolistsAPI, TodolistType} from '../../api/todolists-api'
+import {ResultCode, todolistsAPI, TodolistType} from './todolists-api'
 import {appActions, RequestStatusType} from '../../app/app-reducer'
-import {handleServerAppError, handleServerNetworkError} from '../../utils/error-utils'
+import {handleServerAppError, handleServerNetworkError} from '../../common/utils/error-utils'
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {clearTasksAndTodolists} from "../../common/actions/common-actions";
-import {createAppAsyncThunk} from "../../utils/create-app-async-thunk";
+import {createAppAsyncThunk} from "../../common/utils/create-app-async-thunk";
 
 
 const slice = createSlice({
