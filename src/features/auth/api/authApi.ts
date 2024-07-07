@@ -1,4 +1,3 @@
-
 import {instance} from "common/instance/instance";
 import {BaseResponse} from "common/types";
 

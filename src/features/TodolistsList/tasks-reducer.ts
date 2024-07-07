@@ -6,13 +6,13 @@ import {
     UpdateTaskModelType,
     UpdateTasksArgs
 } from './todolists-api'
-import {appActions} from "../../app/app-reducer";
+import {appActions} from "app/app-reducer";
 import {createSlice} from "@reduxjs/toolkit";
 import {addTodolist, fetchTodos, removeTodolist} from "./todolists-reducer";
-import {clearTasksAndTodolists} from "common/actions/common-actions";
 import {createAppAsyncThunk} from "common/utils/createAppAsyncThunk";
-import {ResultCode, TaskPriorities, TaskStatuses} from "../../common/enums";
-import {handleServerAppError, handleServerNetworkError} from "../../common/utils";
+import {ResultCode, TaskPriorities, TaskStatuses} from "common/enums";
+import {handleServerAppError, handleServerNetworkError} from "common/utils";
+import {clearTasksAndTodolists} from "common/actions";
 
 
 const slice = createSlice({
