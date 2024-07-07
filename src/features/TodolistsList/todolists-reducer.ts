@@ -6,6 +6,7 @@ import {createAppAsyncThunk} from "common/utils/createAppAsyncThunk";
 import {handleServerAppError, handleServerNetworkError} from "common/utils";
 import {ResultCode} from "common/enums";
 import {clearTasksAndTodolists} from "common/actions";
+import {thunkTryCatch} from "../../common/utils/thunk-try-catch";
 
 
 const slice = createSlice({
@@ -48,76 +49,60 @@ const slice = createSlice({
 });
 export const addTodolist = createAppAsyncThunk<{
     todolist: TodolistType
-}, string>(`${slice.name}/addTask`, async (title, thunkAPI) => {
-    const {dispatch, rejectWithValue} = thunkAPI
-    try {
-        dispatch(appActions.setAppStatus({status: 'loading'}))
-        const res = await todolistsAPI.createTodolist(title)
+}, string>(`${slice.name}/addTask`, (title, thunkAPI) => {
+    const { dispatch, rejectWithValue } = thunkAPI;
+    return thunkTryCatch(thunkAPI, async () => {
+        const res = await todolistsAPI.createTodolist(title);
         if (res.data.resultCode === ResultCode.success) {
-            dispatch(appActions.setAppStatus({status: 'succeeded'}))
-            return {todolist: res.data.data.item}
+            return { todolist: res.data.data.item };
         } else {
             handleServerAppError(res.data, dispatch);
-            return rejectWithValue(null)
+            return rejectWithValue(null);
         }
-    } catch (error) {
-        handleServerNetworkError(error, dispatch);
-        return rejectWithValue(null)
-    }
-})
+    });
+});
 
 export const removeTodolist = createAppAsyncThunk<{
     todolistId: string
-}, string>(`${slice.name}/removeTodolist`, async (todolistId, thunkAPI) => {
-    const {dispatch, rejectWithValue} = thunkAPI
-    try {
-        dispatch(appActions.setAppStatus({status: 'loading'}))
-        dispatch(todolistsActions.changeTodolistEntityStatus({id: todolistId, status: 'loading'}))
-        const res = await todolistsAPI.deleteTodolist(todolistId)
+}, string>(`${slice.name}/removeTodolist`, (todolistId, thunkAPI) => {
+    const { dispatch, rejectWithValue } = thunkAPI;
+    return thunkTryCatch(thunkAPI, async () => {
+        dispatch(todolistsActions.changeTodolistEntityStatus({ id: todolistId, status: 'loading' }));
+        const res = await todolistsAPI.deleteTodolist(todolistId);
         if (res.data.resultCode === ResultCode.success) {
-            dispatch(appActions.setAppStatus({status: 'succeeded'}))
-            return {todolistId}
+            return { todolistId };
         } else {
             handleServerAppError(res.data, dispatch);
-            return rejectWithValue(null)
+            return rejectWithValue(null);
         }
-    } catch (error) {
-        handleServerNetworkError(error, dispatch);
-        return rejectWithValue(null)
-    }
-})
+    });
+});
 
 export const fetchTodos = createAppAsyncThunk<{
     todolists: Array<TodolistType>
-}>(`${slice.name}/fetchTodos`, async (arg, thunkAPI) => {
+}>(`${slice.name}/fetchTodos`,  (arg, thunkAPI) => {
     const {dispatch, rejectWithValue} = thunkAPI
-    try {
+    return thunkTryCatch(thunkAPI, async () => {
         dispatch(appActions.setAppStatus({status: 'loading'}))
         const res = await todolistsAPI.getTodolists()
         dispatch(appActions.setAppStatus({status: 'succeeded'}))
         return {todolists: res.data}
-    } catch (error) {
-        handleServerNetworkError(error, dispatch);
-        return rejectWithValue(null)
-    }
+    })
 })
 
 export const changeTodolistTitle = createAppAsyncThunk<{ id: string, title: string }, {
     id: string,
     title: string
-}>(`${slice.name}/changeTodolistTitle`, async (arg, thunkAPI) => {
+}>(`${slice.name}/changeTodolistTitle`,  (arg, thunkAPI) => {
     const {dispatch, rejectWithValue} = thunkAPI
-    try {
+    return thunkTryCatch(thunkAPI, async ()=>{
         const res = await todolistsAPI.updateTodolist(arg.id, arg.title)
         if (res.data.resultCode === ResultCode.success) {
             return {id: arg.id, title: arg.title}
         } else {
             handleServerAppError(res.data, dispatch);
             return rejectWithValue(null)}
-    } catch (error) {
-        handleServerNetworkError(error, dispatch);
-        return rejectWithValue(null)
-    }
+    })
 })
 
 

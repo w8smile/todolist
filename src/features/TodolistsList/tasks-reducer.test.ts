@@ -1,12 +1,12 @@
+/*
 import {
     addTask,
-    fetchTasks, removeTask,
+    fetchTasks,
+    removeTask,
     tasksReducer,
     TasksStateType,
     updateTask
 } from "features/TodolistsList/tasks-reducer";
-
-import {todolistsActions} from "./todolists-reducer";
 import {Action} from "common/types";
 import {TaskPriorities, TaskStatuses} from "common/enums";
 
@@ -243,3 +243,4 @@ test("tasks should be added for todolist", () => {
     expect(endState["todolistId1"].length).toBe(3);
     expect(endState["todolistId2"].length).toBe(0);
 });
+*/

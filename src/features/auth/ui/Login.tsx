@@ -8,6 +8,7 @@ import {Button, Checkbox, FormControl, FormControlLabel, FormGroup, FormLabel, G
 import {selectIsLoggedIn} from "../model/auth-selectors";
 import {ResponseType} from "../../../common/types/types";
 import {LoginParamsType} from "../api/authApi";
+import {BaseResponse} from "../../../common/types";
 
 export const Login = () => {
   const dispatch = useAppDispatch()
@@ -34,15 +35,12 @@ export const Login = () => {
       password: "",
       rememberMe: false,
     },
-    onSubmit: (values: LoginParamsType, formikHelpers: FormikHelpers<LoginParamsType>) => {
+    onSubmit: (values, formikHelpers: FormikHelpers<LoginParamsType>) => {
       dispatch(authThunks.login(values))
           .unwrap()
-          .then((res)=>{
-
-          })
-          .catch((res: ResponseType)=>{
-            res.fieldsErrors.map((el)=>{
-              formikHelpers.setFieldError(el.field, el.error)
+          .catch((reason: BaseResponse) => {
+            reason.fieldsErrors?.forEach((fieldError) => {
+              formikHelpers.setFieldError(fieldError.field, fieldError.error)
             })
           })
     },
